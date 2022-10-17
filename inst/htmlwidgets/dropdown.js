@@ -32,10 +32,10 @@ HTMLWidgets.widget({
 
       renderValue: function(x) {
         const select = document.createElement('select');
-        const svgRoot = document.createElement('div');
-        svgRoot.id = uuid;
+        const plotRoot = document.createElement('div');
+        plotRoot.id = uuid;
 
-        let option, svgContainer;
+        let option, plotContainer, child;
         Object.keys(x.data).forEach((name, index) => {
           option = document.createElement('option');
           option.value = uuid + '-' + name;
@@ -44,18 +44,25 @@ HTMLWidgets.widget({
           option.addEventListener("click", (e) => selectPlot(uuid, e.target.value));
           select.appendChild(option);
 
-          svgContainer = document.createElement('div');
-          svgContainer.id = uuid + '-' + name;
+          plotContainer = document.createElement('div');
+          plotContainer.id = uuid + '-' + name;
           if (index !== 0) {
-            svgContainer.classList.add('hidden');
+            plotContainer.classList.add('hidden');
           }
 
-          svgContainer.innerHTML = x.data[name];
-          svgRoot.appendChild(svgContainer);
+          plotContainer.innerHTML = x.data[name];
+          child = plotContainer.firstChild;
+
+          if (child instanceof SVGElement) {
+            child.setAttribute("width", "100%");
+            child.setAttribute("height", "auto");
+          }
+
+          plotRoot.appendChild(plotContainer);
         });
 
         el.appendChild(select);
-        el.appendChild(svgRoot);
+        el.appendChild(plotRoot);
     },
 
       resize: function(width, height) {

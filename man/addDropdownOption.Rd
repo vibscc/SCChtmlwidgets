@@ -4,7 +4,14 @@
 \alias{addDropdownOption}
 \title{Add an option to a dropdown widget}
 \usage{
-addDropdownOption(dropdown, name, p)
+addDropdownOption(
+  dropdown,
+  name,
+  p,
+  width = NULL,
+  height = NULL,
+  img.format = c("svg", "png")
+)
 }
 \arguments{
 \item{dropdown}{The dropdown widget}
@@ -12,6 +19,12 @@ addDropdownOption(dropdown, name, p)
 \item{name}{Name of the option to add}
 
 \item{p}{ggplot to add with this name}
+
+\item{width}{Plot width in pixels}
+
+\item{height}{Plot height in pixels}
+
+\item{img.format}{Image format to generate. Available options: svg, png}
 }
 \description{
 Add an option to a dropdown widget

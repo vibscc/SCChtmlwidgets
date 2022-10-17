@@ -3,19 +3,21 @@
 #' @param data List of options and corresponding ggplot
 #' @param width Width in pixels (optional, defaults to automatic sizing)
 #' @param height Height in pixels (optional, defaults to automatic sizing)
+#' @param img.format Image format to generate. Available options: svg, png
 #'
 #' @import htmlwidgets
 #'
 #' @export
-dropdown <- function(data = list(), width = NULL, height = NULL) {
-  data <- lapply(data, ggplot_to_svg)
+dropdown <- function(data = list(), width = NULL, height = NULL, img.format = c("svg", "png")) {
+  img.format <- match.arg(img.format)
+  data <- lapply(data, ggplot_to_html, width = width, height = height, img.format = img.format)
 
   htmlwidgets::createWidget(
     name = 'dropdown',
     x = list(data = data),
     width = width,
     height = height,
-    package = 'SCCWidgets'
+    package = 'SCChtmlwidgets'
   )
 }
 
@@ -37,7 +39,7 @@ dropdown <- function(data = list(), width = NULL, height = NULL) {
 #'
 #' @export
 dropdownOutput <- function(outputId, width = '100%', height = '400px'){
-  htmlwidgets::shinyWidgetOutput(outputId, 'dropdown', width, height, package = 'SCCWidgets')
+  htmlwidgets::shinyWidgetOutput(outputId, 'dropdown', width, height, package = 'SCChtmlwidgets')
 }
 
 #' @rdname dropdown-shiny

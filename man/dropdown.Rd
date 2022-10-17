@@ -4,7 +4,12 @@
 \alias{dropdown}
 \title{Create an interactive dropdown}
 \usage{
-dropdown(data = list(), width = NULL, height = NULL)
+dropdown(
+  data = list(),
+  width = NULL,
+  height = NULL,
+  img.format = c("svg", "png")
+)
 }
 \arguments{
 \item{data}{List of options and corresponding ggplot}
@@ -12,6 +17,8 @@ dropdown(data = list(), width = NULL, height = NULL)
 \item{width}{Width in pixels (optional, defaults to automatic sizing)}
 
 \item{height}{Height in pixels (optional, defaults to automatic sizing)}
+
+\item{img.format}{Image format to generate. Available options: svg, png}
 }
 \description{
 Create an interactive dropdown
