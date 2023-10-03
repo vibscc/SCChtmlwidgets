@@ -47,7 +47,6 @@ HTMLWidgets.widget({
           option.value = uuid + '-' + name;
           option.text = name;
 
-          option.addEventListener("click", (e) => selectPlot(uuid, e.target.value));
           select.appendChild(option);
 
           plotContainer = document.createElement('div');
@@ -66,6 +65,8 @@ HTMLWidgets.widget({
 
           plotRoot.appendChild(plotContainer);
         });
+
+        select.addEventListener("change", (e) => selectPlot(uuid, e.target.value));
 
         el.appendChild(select);
         el.appendChild(plotRoot);
